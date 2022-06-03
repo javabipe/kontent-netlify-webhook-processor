@@ -9,9 +9,7 @@ initializeApp({
  
 const db = getFirestore();
 
- let data;
- let data1;
-
+ let id_webhook;
 
 exports.handler = async (event, context) => {
 
@@ -19,24 +17,21 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
-
-    let json = JSON.parse(event.body);
-      data = json.event;
 	
-	let variaveis_remetente = {
-	data: new Date(),
-	boasvindas_sent: true,
-	webhook: data.toString()
-  }
- db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
-				const receber_dados = await consultar.get();
-	data1 = receber_dados.data().botao1;
+      let payment = {
+      payment_type: billingType,
+      payment: true
+    }
 
-  console.log(data);
+    	let json = JSON.parse(event.body);
+      	id_webhook = json.payment.id.toString();
+ 	await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook).set(phoneConfirmation);
+	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
+	const receber_dados = await consultar.get();
+	data1 = receber_dados.data().botao1;
  
   return {
     statusCode: 200,
-    body: data1,
+    //body: data1,
   };
 };
