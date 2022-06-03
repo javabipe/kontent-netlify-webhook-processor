@@ -19,9 +19,9 @@ let variaveis_remetente = {
 	data: new Date(),
 	boasvindas_sent: true
   }
- await db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-	const consultar = await db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
-				const receber_dados = await consultar.get();
+ db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
+	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
+				const receber_dados = consultar.get();
 	data1 = receber_dados.data().botao1;
 
 exports.handler = async (event, context) => {
