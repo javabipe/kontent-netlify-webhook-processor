@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
   }
 	
       let payment = {
-      payment_type: billingType,
+      payment_type: json.payment.billingType.toString(),
       payment: true
     }
 
