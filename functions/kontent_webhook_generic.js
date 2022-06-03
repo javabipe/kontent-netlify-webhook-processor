@@ -13,15 +13,15 @@ initializeApp({
  
 const db = getFirestore();
 
+ let data;
 
-exports.handler = async (event, context) => {
+exports.handler = sync (event, context) => {
 
   // Only receiving POST requests
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
- let data;
     let json = JSON.parse(event.body);
       data = json.event;
 
@@ -30,8 +30,7 @@ let variaveis_remetente = {
 	boasvindas_sent: true
   }
   console.log(data);
-  			db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-
+  db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
 
   return {
     statusCode: 200,
