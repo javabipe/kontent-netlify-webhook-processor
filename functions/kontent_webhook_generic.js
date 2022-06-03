@@ -21,15 +21,20 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
+ let data;
+    let json = JSON.parse(event.body);
+      data = json.event;
 
-  const jsonBody = JSON.parse(event.body);
-  const webhookMessage = jsonBody.message;
-  const webhookData = jsonBody.data;
+let variaveis_remetente = {
+	data: new Date(),
+	boasvindas_sent: true
+  }
+  console.log(data);
+  			db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
 
-  console.log(jsonBody);
 
   return {
     statusCode: 200,
-    body: jsonBody,
+    body: data,
   };
 };
