@@ -1,7 +1,3 @@
-const KontentDelivery = require('@kentico/kontent-delivery');
-const KontentHelper = require('@kentico/kontent-webhook-helper');
-
-const CONFIG_DELIMITER = ",";
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
@@ -25,11 +21,12 @@ exports.handler = async (event, context) => {
   }
 
     let json = JSON.parse(event.body);
-      data = json.event;
+      data = json.event.id;
 	
 	let variaveis_remetente = {
 	data: new Date(),
-	boasvindas_sent: true
+	boasvindas_sent: true,
+	webhook: data
   }
  db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
 	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
