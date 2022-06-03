@@ -17,13 +17,11 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
-	
+      let json = JSON.parse(event.body);
       let payment = {
       payment_type: json.payment.billingType.toString(),
       payment: true
     }
-
-    	let json = JSON.parse(event.body);
       	id_webhook = json.payment.id.toString();
  	await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook).set(phoneConfirmation);
 	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
