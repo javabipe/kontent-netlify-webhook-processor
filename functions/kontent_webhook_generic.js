@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
       payment: true
     }
       	id_webhook = json.payment.id.toString();
- 	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook);
+ 	      const newClient = await db.collection(dbName).doc('orders').collection('orders').doc('177521');
         const show_code = await newClient.update(payment);
 
  
