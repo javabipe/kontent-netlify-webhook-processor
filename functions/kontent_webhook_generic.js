@@ -15,8 +15,12 @@ const db = getFirestore();
 
  let data;
  let data1;
- db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
+let variaveis_remetente = {
+	data: new Date(),
+	boasvindas_sent: true
+  }
+ await db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
+	const consultar = await db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
 				const receber_dados = await consultar.get();
 	data1 = receber_dados.data().botao1;
 
@@ -30,10 +34,6 @@ exports.handler = async (event, context) => {
     let json = JSON.parse(event.body);
       data = json.event;
 
-let variaveis_remetente = {
-	data: new Date(),
-	boasvindas_sent: true
-  }
   console.log(data);
  
   return {
