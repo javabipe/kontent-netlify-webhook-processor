@@ -21,12 +21,12 @@ exports.handler = async (event, context) => {
   }
 
     let json = JSON.parse(event.body);
-      data = json.event.id;
+      data = json.event;
 	
 	let variaveis_remetente = {
 	data: new Date(),
 	boasvindas_sent: true,
-	webhook: data
+	webhook: data.toString();
   }
  db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
 	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
