@@ -7,7 +7,8 @@
     "@kentico/kontent-delivery": "^10.3.0",
     "@kentico/kontent-webhook-helper": "^1.1.0",
     "crypto": "^1.0.1",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "firebase-admin": "^10.2.0"
   },
   "devDependencies": {},
   "scripts": {
