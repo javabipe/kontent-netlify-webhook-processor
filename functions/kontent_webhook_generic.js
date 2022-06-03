@@ -23,10 +23,7 @@ exports.handler = async (event, context) => {
       payment: true
     }
       	id_webhook = json.payment.id.toString();
- 	await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook).set(phoneConfirmation);
-	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
-	const receber_dados = await consultar.get();
-	data1 = receber_dados.data().botao1;
+ 	await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook).set(payment);
  
   return {
     statusCode: 200,
