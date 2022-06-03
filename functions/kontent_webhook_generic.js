@@ -26,10 +26,10 @@ exports.handler = async (event, context) => {
   const webhookMessage = jsonBody.message;
   const webhookData = jsonBody.data;
 
-  console.log(JSON.stringify(response));
+  console.log(jsonBody);
 
   return {
     statusCode: 200,
-    body: `${JSON.stringify(response)}`,
+    body: jsonBody,
   };
 };
