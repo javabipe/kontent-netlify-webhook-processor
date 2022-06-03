@@ -10,7 +10,7 @@ const dbName = "44027701000190";
 initializeApp({
   credential: cert(serviceAccount)
 });
-
+ 
 const db = getFirestore();
 
 
