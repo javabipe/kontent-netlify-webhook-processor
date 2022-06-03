@@ -23,8 +23,14 @@ exports.handler = async (event, context) => {
       payment: true
     }
       	id_webhook = json.payment.id.toString();
- 	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook).get();
-        const show_code = newClient.ref.update(payment);
+ 	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+          doc.ref.update(payment)//not doc.update({foo: "bar"})
+      });
+ })
 
  
   return {
