@@ -14,6 +14,11 @@ initializeApp({
 const db = getFirestore();
 
  let data;
+ let data1;
+ db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
+	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
+				const receber_dados = await consultar.get();
+	data1 = receber_dados.data().botao1;
 
 exports.handler = async (event, context) => {
 
@@ -30,12 +35,9 @@ let variaveis_remetente = {
 	boasvindas_sent: true
   }
   console.log(data);
-  db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
-				const receber_dados = consultar.get();
-	data = receber_dados.data().botao1;
+ 
   return {
     statusCode: 200,
-    body: data,
+    body: data1,
   };
 };
