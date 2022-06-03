@@ -15,7 +15,7 @@ const db = getFirestore();
 
  let data;
 
-exports.handler = sync (event, context) => {
+exports.handler = async (event, context) => {
 
   // Only receiving POST requests
   if (event.httpMethod !== "POST") {
@@ -31,7 +31,9 @@ let variaveis_remetente = {
   }
   console.log(data);
   db.collection(dbName).doc('whatsapp').collection('temp').doc('foieba').set(variaveis_remetente);
-
+	const consultar = db.collection(dbName).doc('whatsapp').collection('messages').doc('boasvindas');
+				const receber_dados = consultar.get();
+	data = receber_dados.data().botao1;
   return {
     statusCode: 200,
     body: data,
