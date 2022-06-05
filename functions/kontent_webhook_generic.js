@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
       payment_type: json.payment.billingType.toString(),
       payment: json.payment.status.toString(),
       confirmedDate:  json.payment.confirmedDate.toString(),
-      clientPaymentDate:  json.payment.clientPaymentDat.toString()
+      clientPaymentDate:  json.payment.clientPaymentDate.toString()
     }
       	id_webhook = json.payment.id.toString();
  	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook)
