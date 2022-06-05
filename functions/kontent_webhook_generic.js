@@ -15,12 +15,14 @@ exports.handler = async (event, context) => {
 
   // Only receiving POST requests
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, body: "Método não permitido" };
   }
       let json = JSON.parse(event.body);
       let payment = {
       payment_type: json.payment.billingType.toString(),
-      payment: true
+      payment: json.payment.status.toString(),
+      confirmedDate:  json.payment.confirmedDate.toString(),
+      clientPaymentDate:  json.payment.clientPaymentDat.toString()
     }
       	id_webhook = json.payment.id.toString();
  	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook)
