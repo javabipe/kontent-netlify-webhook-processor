@@ -18,26 +18,21 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Método não permitido" };
   }
       let json = JSON.parse(event.body);
+      if (json.event === "PAYMENT_RECEIVED") {
       let payment = {
-      payment_type: json.payment.billingType.toString(),
-      payment: true,
-      payment_status: json.payment.status.toString(),
-      confirmedDate:  json.payment.confirmedDate.toString(),
-      clientPaymentDate:  json.payment.clientPaymentDate.toString()
+      payment: true
     }
       	id_webhook = json.payment.id.toString();
  	      const newClient = await db.collection(dbName).doc('orders').collection('orders').where('id', '==', id_webhook)
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
-          console.log(doc.id, " => ", doc.data());
-          doc.ref.update(payment)//not doc.update({foo: "bar"})
+          doc.ref.update(payment)
       });
  })
-
+        }
  
   return {
-    statusCode: 200,
-    //body: data1,
+    statusCode: 200
   };
 };
